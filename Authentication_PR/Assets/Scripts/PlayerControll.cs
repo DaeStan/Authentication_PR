@@ -10,11 +10,11 @@ public class PlayerControll : MonoBehaviour
     private float startTime;
     private float timeTaken;
     private int collectablesPicked;
-    public int maxCollectables = 10;
+    public int maxCollectables = 6;
     private bool isPlaying;
     public GameObject playButton;
     public TextMeshProUGUI curTimeText;
-
+    public float jumpForce = 7f;
 
     void Awake()
     {
@@ -35,6 +35,9 @@ public class PlayerControll : MonoBehaviour
 
         float x = Input.GetAxis("Horizontal") * speed;
         float z = Input.GetAxis("Vertical") * speed;
+
+        if (Input.GetKeyDown(KeyCode.Space))
+            GetComponent<Rigidbody>().velocity = new Vector3(0, jumpForce, 0);
 
         rig.velocity = new Vector3(x, rig.velocity.y, z);
 
